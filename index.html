@@ -2204,8 +2204,95 @@
 										<h2>Results</h2>
 									</header>
 										<div class="content">
-											<strong> The machine is still learning! Stay tuned. <br><br>
-											<br></strong>
+											Different classifiers are used in our modelling, namely:<br><br>
+											<ul>
+												<li><strong>Logistic Regression</strong></li>
+												<li><strong>Decision Tree</strong></li>
+												<li><strong>Random Forest</strong></li>
+												<li><strong>SVM</strong></li>
+												<li><strong>Feedforward Neural Network</strong></li>
+											</ul>
+											<br>
+											The goal of our model is not to achieve the highest accuracy, but having a right balance between our precision score and recall score. Taking things into context : <br><br>
+											<ul>
+												<li>‘False Positive’ means that patients who did not survive the hospital stay are not being identified. This may result in an erroneous focus on the patient’s treatment priority. (e.g. choice of sending patient to hospice)</li>
+												<br>
+												<li>’False Negative’ means that patients who survive the hospital stay are being flagged with a probability of mortality. This may result in unnecessary panic and less efficient allocation of resources. </li>
+											</ul>
+											<br>
+											We will be using the minimum of precision score and recall score as our metric for our models and  using the *SOFA score as a benchmark.
+											<br><br>
+											Here are the results achieved for the different models:
+											<br><br>
+											<img src="images/results1.png" alt="" />
+											<br><br>We can observed that the models did not perform that well and there is definitely room for improvement. 
+											<br><br>
+											We tried using Linear Discriminant Analysis (LDA) to reduce feature dimension and to reduce complexity in our model. LDA finds a low-dimensional space such that when X is projected, the classes are well-separated at its best. However, it is essential to note that LDA assumes normality in the dataset. This assumption is violated in the case of our dataset.
+											<br><br>
+											After using LDA, we can see a significant improvement in our results:
+											<br><br>
+											<img src="images/results2.png" alt="" />
+											<br><br>
+											How can I improve my model?
+											<br><br>
+											<ul>
+												<li><strong>Increase the number of training data</strong> 
+													<br> Although we had 4000 rows of patients data initially, due to oversampling to handle the imbalance classes and train test split, we are left with only 1321 rows for our modelling. This led to the model not being able to train and generalise well.</li>
+												<br>
+												<li><strong>Bring in clinical knowledge </strong>
+													<br>By having domain knowledge of ICU medicine, we will be able to identify and rank key features based on their importance in prediction. With such information, we will be able assign weights to more important features.</li>
+												<br>
+												<li><strong>Explore more sophisticated models </strong>
+													<br>Such as Convolutional Neural Networks, LSTM (Long Short Term Memory), Ensemble methods which have been known to produce better accuracies. However, it is essential to note that more complex models would usually require higher computing power, more time thus leading to higher costs.</li>
+												</ul>
+
+												<br><br>
+
+											*Benchmarking based on SOFA (Sequential Organ Failure Assessment) scores 
+											<br><br>
+											The SOFA score is available under the outcome-related descriptors in our dataset. Do note that SOFA score is designed to evaluate organ dysfunction in critically ill patients and not directly to predict mortality. However, SOFA scores can be used as an estimation of mortality in the ICU based on two research papers:<br><br>
+											<ul>
+												<li>Vincent JL, de Mendonça A, Cantraine F, et al. Use of the SOFA score to assess the incidence of organ dysfunction/failure in intensive care units: results of a multicenter, prospective study. Working group on "sepsis-related problems" of the European Society of Intensive Care Medicine. Crit Care Med. 1998;26(11):1793-800. PMID 9824069. </li>
+												<li>Ferreira FL, Bota DP, Bross A, et al. Serial evaluation of the SOFA score to predict outcome in critically ill patients. JAMA. 2001;286(14):1754-8. PMID 11594901. </li>
+											</ul>
+
+											<br>Mortality estimated by SOFA score can be summarised in the table below:
+											<br><br>
+											<table class="dataTable dataTableCenter" style="margin-bottom: 1em; max-width: 300px">
+									            <tbody><tr class="dataRowHeader">
+									                <td><b>Maximum<br> SOFA Score</td></b>
+									                <td><b>Mortality</td></b>
+									            </tr>
+									            <tr class="dataRowOdd">
+									                <td>0 to 6</td>
+									                <td>&lt; 10%</td>
+									            </tr>
+									            <tr class="dataRowEven">
+									                <td>7 to 9</td>
+									                <td>15 - 20%</td>
+									            </tr>
+									            <tr class="dataRowOdd">
+									                <td>10 to 12</td>
+									                <td>40 - 50%</td>
+									            </tr>
+									            <tr class="dataRowEven">
+									                <td>13 to 14</td>
+									                <td>50 - 60%</td>
+									            </tr>
+									            <tr class="dataRowOdd">
+									                <td>15</td>
+									                <td>&gt; 80%</td>
+									            </tr>
+									            <tr class="dataRowEven">
+									                <td>15 to 24</td>
+									                <td>&gt; 90%</td>
+									            </tr>
+									        </tbody></table>
+
+									        <br>We will be taking mortality >= 50% (SOFA Score >= 13) as 'death' (1 in binary terms)
+									        <br><br>
+									        <i>*Reference: Jul 1 2017 - ClinCalc LLC (http://clincalc.com/IcuMortality/SOFA.aspx) </i>
+											
 										</div>	
 								</section>
 
