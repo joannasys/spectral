@@ -88,6 +88,7 @@
 											<strong>The data used in this project is obtained from the <a target="_blank" href="https://physionet.org/challenge/2012/"> PhysioNet/CinC Challenge 2012</a>. It consists of records from 4,000 ICU stays. 
 											All patients were adults who were admitted for a wide variety of reasons - cardiac, medical, surgical, or trauma.
 											Up to 42 variables were recorded at least once during the first 48 hours: <br><br>
+											In-hospital mortality will be our target in this project: 1 being in-hospital death while 0 being survival.<br><br>
 											<br></strong>
 										</div>
 									<div class="features">
@@ -423,44 +424,10 @@
 										<h2>Analysis</h2>
 									</header>
 									<div class="posts">
-										<article>
-											<a class="image"><img src="images/imba_1.png" alt="" /></a>
-											<h3>Imbalanced Class</h3>
-											<p>In-hospital mortality will be our target in this project - 1 being in-hospital death while 0 being survival. There are only 13.9% of in-hospital mortality (positives) in the dataset. In such cases, using accuracy as a metric will be misleading and unreliable.</p>
-
-											<button id="imba_btn" class="button">More</button>
-
-													<!-- Trigger/Open The Modal -->
-												<div id="imba_modal" class="modal">
-
-												  <!-- Modal content -->
-												<div class="modal-content">
-												  <span class="imba_close">&times;</span>
-												  <br>
-												  <h3>Imbalanced Class</h3>
-												  <p> In-hospital mortality will be our target in this project - 1 being in-hospital death while 0 being survival. The graph below shows the distribution of the two classes. There are only 15.0% of in-hospital mortality (positives) in the dataset. In such cases, using accuracy as a metric will be misleading and unreliable. (Think about it. Even without any algorithm, we will achieve an accuracy of 85.0%!)
-												  <br><br>
-												  <img src="images/imba_1.png" alt="" />
-												  <br><br>Hence, instead of accuracy, precision and recall scores will be a more meaningful metric to evaluate our model performance. We will be using the same scoring as the PhysioNet 2012 challenge - the minimum of precision score and recall score. We define true positives (TP), false positives (FP), false negatives (FN), and true negatives (TN) as below:
-												  <br><br>
-												  <img src="images/imba_2.png" alt="" />
-													<br><br>
-													<img src="https://latex.codecogs.com/gif.latex?Precision&space;=&space;\frac{TP}{(TP&space;&plus;&space;FP)}" title="Precision = \frac{TP}{(TP + FP)}" />
-													<br><br>
-													<img src="https://latex.codecogs.com/gif.latex?Recall&space;=&space;\frac{TP}{TP&space;&plus;&space;FN}" title="Recall = \frac{TP}{TP + FN}" />
-													</p>
-													<br><span class="imba_close">&times;</span>
-
-												</div>
-												</div>
-											
-											<!--<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>-->
-										</article>
+										
 										<article>
 											<a class="image"><img src="images/feat_engine_a.png" alt="" /></a>
-											<h3>Feature Engineering</h3>
+											<h3>1. Feature Engineering</h3>
 											<p>Each patient record is in the form of a time series. To capture the best property of the time series, the mean, minimum and maximum, first and last observed data to represent the average and extremities are extracted.</p>
 											<button id="feat_btn" class="button">More</button>
 
@@ -497,7 +464,7 @@
 										</article>
 										<article>
 											<a class="image"><img src="images/data_ex_corr_1.png" alt="" /></a>
-											<h3>Data Exploration and Preprocessing</h3>
+											<h3>2. Data Exploration and Preprocessing</h3>
 											<p>
 											We will be investigating multi-colinearity between features and identifying outliers in the dataset with visualisations.</p>
 											<button id="data_ex_btn" class="button">More</button>
@@ -2086,7 +2053,7 @@
 										</article>
 										<article>
 											<br><br><br> <a class="image"><img src="images/data_stand_class2.png" alt="" /></a>
-											<br><br><br> <h3>Data Standardisation</h3>
+											<br><br><br> <h3>3. Data Standardisation</h3>
 											<p>
 											After preprocessing, we used RobustScaler to scale numerical data and got dummy variables for categorical data.</p>
 											<button id="data_stand_btn" class="button">More</button>
@@ -2123,7 +2090,7 @@
 										</article>
 										<article>
 											<a class="image"><img src="images/feat_sel_corrmatrix1.png" alt="" /></a>
-											<h3>Feature Selection</h3>
+											<h3>4. Feature Selection</h3>
 											<p>The existence of multicolinear features may add noise to our model resulting in overfitting. Using the variance inflation factor(VIF), we will be able to estimate how much the variance of a regression coefficient of a particular feature is inflated due to multicollinearity.
 											</p>
 											<button id="feat_sel_btn" class="button">More</button>
@@ -2158,9 +2125,50 @@
 												</div>
 												</div>
 										</article>
+
+										<article>
+											<a class="image"><img src="images/imba_head.png" alt="" /></a>
+											<h3>5. Performance Metric</h3>
+											<p>In-hospital mortality will be our target in this project - 1 being in-hospital death while 0 being survival. There are only 13.9% of in-hospital mortality (positives) in the dataset. In such cases, using accuracy as a metric will be misleading and unreliable.</p>
+
+											<button id="imba_btn" class="button">More</button>
+
+													<!-- Trigger/Open The Modal -->
+												<div id="imba_modal" class="modal">
+
+												  <!-- Modal content -->
+												<div class="modal-content">
+												  <span class="imba_close">&times;</span>
+												  <br>
+												  <h3>Performance Metric</h3>
+												  <p> In-hospital mortality will be our target in this project - 1 being in-hospital death while 0 being survival. The graph below shows the distribution of the two classes. There are only 15.0% of in-hospital mortality (positives) in the dataset. In such cases, using accuracy as a metric will be misleading and unreliable. (Think about it. Even without any algorithm, we will achieve an accuracy of 85.0%!)
+												  <br><br>
+												  <img src="images/imba_1.png" alt="" />
+												  <br><br>Hence, instead of accuracy, precision and recall scores will be a more meaningful metric to evaluate our model performance. We will be using the same scoring as the PhysioNet 2012 challenge - the minimum of precision score and recall score. We define true positives (TP), false positives (FP), false negatives (FN), and true negatives (TN) as below:
+												  <br><br>
+												  <img src="images/imba_2.png" alt="" />
+													<br><br>
+													<img src="https://latex.codecogs.com/gif.latex?Precision&space;=&space;\frac{TP}{(TP&space;&plus;&space;FP)}" title="Precision = \frac{TP}{(TP + FP)}" />
+													<br><br>
+													<img src="https://latex.codecogs.com/gif.latex?Recall&space;=&space;\frac{TP}{TP&space;&plus;&space;FN}" title="Recall = \frac{TP}{TP + FN}" />
+													</p>
+													<br><span class="imba_close">&times;</span>
+
+												</div>
+												</div>
+											
+											<!--<ul class="actions">
+												<li><a href="#" class="button">More</a></li>
+											</ul>-->
+										</article>
+
+
+
+
+
 										<article>
 											<br><a class="image"><img src="images/resamp_pie.png" alt="" /></a>
-											<br><br><h3>Imbalanced Class Resampling</h3>
+											<br><br><h3>6. Imbalanced Class Resampling</h3>
 											<p>To deal with this problem, there are two approaches that we have used in this dataset: Oversampling with Synthetic Minority Over-sampling Technique (SMOTE) and Edited Nearest Neighbours (ENN).
 											</p>
 											<button id="resamp_btn" class="button">More</button>
@@ -2232,6 +2240,7 @@
 											After using LDA, we can see a significant improvement in our results:
 											<br><br>
 											<img src="images/results2.png" alt="" />
+
 											<br><br>
 											How can I improve my model?
 											<br><br>
@@ -2247,6 +2256,7 @@
 												</ul>
 
 												<br><br>
+
 
 											*Benchmarking based on SOFA (Sequential Organ Failure Assessment) scores 
 											<br><br>
@@ -2296,8 +2306,27 @@
 										</div>	
 								</section>
 
+								<!-- Section -->
+								<section id = "getintouch">
+									<header class="major">
+										<h2>Get in touch!</h2>
+									</header>
+										<div class="content">
+										<p><strong>Joannas</strong> Yeow<br>
+										Aspiring data scientist seeking for opportunitues.</p>
+										<ul class="contact">
+											<li class="fa-envelope-o"><a href="mailto:joannas.y@live.com.sg">joannas.y@live.com.sg</a></li>
+											<li class="fa-phone">+65 9837 8407</li>
+										</ul>
+									</div>
+								</section>
+
 						</div>
 					</div>
+
+							
+
+
 
 				<!-- Sidebar -->
 					<div id="sidebar">
