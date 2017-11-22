@@ -45,7 +45,7 @@
 										<p>
 										The development of methods for prediction of mortality rates in the Intensive Care Unit (ICU) has been motivated by the need to to increase treatment effectiveness, efficient use of resources, and functional discharge to post-acute care facilities.<br><br>
 
-										The main aim is to develop a solution  for <strong>patient-specific prediction of in-hospital mortality that serves as a decision support for medical practitioners and medical care givers.</strong></p>
+										The main aim of this project is to develop a solution  for <strong><u>patient-specific prediction of in-hospital mortality that serves as a decision support for medical practitioners and medical care givers.</u></strong></p>
 										<ul class="actions">
 											<li><a href="#problem" class="button big">Learn More</a></li>
 										</ul>
@@ -140,7 +140,7 @@
 														  
 														<tr>
 														    <td class="tg-yw4l">SOFA score</td>
-														    <td class="tg-yw4l">between 0 to 4</td>
+														    <td class="tg-yw4l">between 0 to 24</td>
 														</tr>
 														  
 														<tr>
@@ -440,16 +440,16 @@
 												  <span class="feat_close">&times;</span>
 
 												  <h3>Feature Engineering</h3>
-												  <p> Each patient record is in the form of a time series - variables may be observed once, more than once, or not at all in some cases within 48 hours. Descriptor variables are recorded at time 00:00. To capture the best property of the time series, we will have to extract out batches of aggregated information from it. The table below shows the original time series data.
+												  <p> Each patient record is in the form of a time series - variables may be observed once, more than once, or not at all in some cases within 48 hours. Descriptor variables are recorded at time 00:00. To capture the best property of the time series, I have extracted out batches of aggregated information from it. The table below shows the original time series data.
 												  <br><br>
 												  <img src="images/feat_engine_timeseries.png" alt="" /><br>
-												  <br><br>We have chosen to extract the mean, minimum and maximum, first and last observed data to represent the average and extremities of the time series. The table below shows the extracted data for a patient record. 
+												  <br><br>I have chosen to extract the mean, minimum and maximum, first and last observed data to represent the average and extremities of the time series. The table below shows the extracted data for a patient record. 
 												  <br><br>
 												  <img src="images/feat_engine.png" alt="" /><br>
 												  <br><br>
-												  After extraction, we observed that most patient records lack laboratory test results and most variables leading to many ‘Not-a-number’ (NaN) values in the dataset which would cause a problem in our modelling. 
+												  After extraction, I observed that most patient records lack laboratory test results and most variables leading to many ‘Not-a-number’ (NaN) values in the dataset which would cause a problem in our modelling. 
 												  <br><br>
-												  To resolve the issue of NaN values, we imputed the NaN values for each variable of each patient based on the median of the same age group, ICU type and gender group. This seems to better represent the patient’s condition. Certain conditions may have some extremes in certain variables, it would not be fair if we were to perform a simple mean or median imputation.
+												  To resolve the issue of NaN values, I imputed the NaN values for each variable of each patient based on the median of the same age group, ICU type and gender group. This seems to better represent the patient’s condition. Certain conditions may have some extremes in certain variables, it would not be fair if I were to perform a simple mean or median imputation.
 												  <br><br>
 												  The table below shows the median value of each variables based on age group, ICU type and gender.
 												  <br><br>
@@ -466,7 +466,7 @@
 											<a class="image"><img src="images/data_ex_corr_1.png" alt="" /></a>
 											<h3>2. Data Exploration and Preprocessing</h3>
 											<p>
-											We will be investigating multi-colinearity between features and identifying outliers in the dataset with visualisations.</p>
+											I will be investigating multi-colinearity between features and identifying outliers in the dataset with visualisations.</p>
 											<button id="data_ex_btn" class="button">More</button>
 
 													<!-- Trigger/Open The Modal -->
@@ -478,9 +478,9 @@
 
 												  <h3>Data Exploration and Preprocessing</h3>
 												  <p> <img src="images/data_ex_corrmatrix.png" alt="" /><br><br>
-												  	In the above correlation matrix, we can see that there are more lighter blue than red. A lighter colour indicates that there is little correlation between the features. The distinct horizontal lines are due to high correlations between the mean, minimum, maximum, first and last of the same variable. 
+												  	In the above correlation matrix, it is noticable that there are more lighter blue than red. A lighter colour indicates that there is little correlation between the features. The distinct horizontal lines are due to high correlations between the mean, minimum, maximum, first and last of the same variable. 
 												  	<br><br>
-												  	We can observed that there are vertical and horizontal light blue lines. That is because the variable 'MechVent' is a binary variable. A further exploration tells us that there is 0 variance in this variable (all values in this column is 1!) This variable will not be useful in our predictions. We will drop these columns.
+												  	I also observed that there are distinct vertical and horizontal light blue lines. That is because the variable 'MechVent' is a binary variable. A further exploration tells us that there is 0 variance in this variable (all values in this column is 1!) This variable will not be useful in our predictions. I will drop these columns.
 												  	<br><br>
 												  	<div class="container">
 												  	
@@ -2024,23 +2024,23 @@
 
 													</div>
 												  	<br><br>
-												  	Looking in depth in to the .describe attribute (from pandas), we made the following observations:
+												  	Looking in depth in to the .describe attribute (from pandas), I made the following observations:
 												  	
 												  	<br><br><strong>PH</strong>
-												  	<br>PH level is between 0 - 14. There are some records that are off the charts, probably due to human error or different metrics. We will be imputing them with the median of the same age, icutype and gender.
+												  	<br>PH level is between 0 - 14. There are some records that are off the charts, probably due to human error or different metrics. I imputed them with the median of the same age, icutype and gender.
 												  	<br><br>
 												  	<img src="images/data_ex_ph.png">
 												  	<br><br><strong>Temperature</strong>
-												  	<br>Normal human temperature ranges from 34 degrees to 42 degrees. There are some records that are off the charts, (negative temperature) probably due to human errorin recording. We will be imputing them with the median of the same age, icutype and gender.
+												  	<br>Normal human temperature ranges from 34 degrees to 42 degrees. There are some records that are off the charts, (negative temperature) probably due to human errorin recording. I imputed them with the median of the same age, icutype and gender.
 												  	<br><br>
 												  	<img src = "images/data_ex_temp.png">
 												  	<br><br><strong>Urine output</strong>
-												  	<br>Urine output seems to be the one that has the highest outlier. A higher urine output level could be due to recording error. We will be imputing urine output > 20000ml with the median of the same age, icutype and gender.
+												  	<br>Urine output seems to be the one that has the highest outlier. A higher urine output level could be due to recording error. I imputed the urine output that are > 20000ml with the median of the same age, icutype and gender.
 												  	<br><br>
 												  	<img src ="images/data_ex_urine.png">
 												  	<br><br><br>
 												  	<h3>Feature Engineering</h3>
-												  	<br> PaO2/FiO2 ratio is the ratio of arterial oxygen partial pressure to fractional inspired oxygen aka the Carrico index and the PF ratio. It has been used in the SAPS-| and SOFA scoring for critical assessment. Since we have PaO2 and FiO2 information, we are able to engineer the PF ratio as an additional feature.<br><br><br><br>
+												  	<br> PaO2/FiO2 ratio is the ratio of arterial oxygen partial pressure to fractional inspired oxygen aka the Carrico index and the PF ratio. It has been used in the SAPS-| and SOFA scoring for critical assessment. Since I have PaO2 and FiO2 information, I will be able to engineer the PF ratio as an additional feature.<br><br><br><br>
 												  	
 
 												  </p>
@@ -2055,7 +2055,7 @@
 											<br><br><br> <a class="image"><img src="images/data_stand_class2.png" alt="" /></a>
 											<br><br><br> <h3>3. Data Standardisation</h3>
 											<p>
-											After preprocessing, we used RobustScaler to scale numerical data and got dummy variables for categorical data.</p>
+											After preprocessing, I used RobustScaler to scale numerical data and got dummy variables for categorical data.</p>
 											<button id="data_stand_btn" class="button">More</button>
 
 													<!-- Trigger/Open The Modal -->
@@ -2067,7 +2067,7 @@
 
 												  <h3>Data Standardisation</h3>
 												  <p> 
-												  	After preprocessing, we used sklearn’s RobustScaler to standardise the numerical variables. Standardisation is essential to improve the predictive performance of our algorithms - especially so for gradient-based classifiers. RobustScaler scales the data based on the percentiles rather than the mean and standard deviation, it is not influenced by marginal outliers.
+												  	After preprocessing, I used sklearn’s RobustScaler to standardise the numerical variables. Standardisation is essential to improve the predictive performance of our algorithms - especially so for gradient-based classifiers. RobustScaler scales the data based on the percentiles rather than the mean and standard deviation, it is not influenced by marginal outliers.
 												  	<br><br>
 												  	For categorial features, we used pandas’ pd.get_dummies method to obtain a matrix of dummy variables in 0 or 1. While some algorithms (such as decision trees and random forest) do not require this step, most machine learning algorithm requires all features to be numerical.
 												  	<br><br>
@@ -2079,7 +2079,7 @@
 												  	<br><br>
 												  	<img src="images/data_stand_class3.png" alt="" />
 												  	<br><br>
-												  	After standardisation, we will be able to visualise our features in a boxplot.
+												  	After standardisation, I will be able to visualise our features in a boxplot.
 												  	<br><br>
 												  	<img src="images/boxplot.png">
 
@@ -2091,7 +2091,7 @@
 										<article>
 											<a class="image"><img src="images/feat_sel_corrmatrix1.png" alt="" /></a>
 											<h3>4. Feature Selection</h3>
-											<p>The existence of multicolinear features may add noise to our model resulting in overfitting. Using the variance inflation factor(VIF), we will be able to estimate how much the variance of a regression coefficient of a particular feature is inflated due to multicollinearity.
+											<p>The existence of multicolinear features may add noise to our model resulting in overfitting. Using the variance inflation factor(VIF), I will be able to estimate how much the variance of a regression coefficient of a particular feature is inflated due to multicollinearity.
 											</p>
 											<button id="feat_sel_btn" class="button">More</button>
 
@@ -2106,7 +2106,7 @@
 												  <p> 
 												  	<img src="images/data_ex_corrmatrix.png" alt="" />
 												  	<br><br>
-												  	Recall from the correlation matrix that there are some features that are multicollinear with each other. The existence of multicolinear features may add noise to our model resulting in overfitting. Using the variance inflation factor(VIF), we will be able to estimate how much the variance of a regression coefficient of a particular feature is inflated due to multicollinearity. 
+												  	Recall from the correlation matrix that there are some features that are multicollinear with each other. The existence of multicolinear features may add noise to our model resulting in overfitting. Using the variance inflation factor(VIF), I will be able to estimate how much the variance of a regression coefficient of a particular feature is inflated due to multicollinearity. 
 												  	<br><br>
 												  	The VIF ranges from 1 (1 being not correlated). We have set a threshold of 5, any features with VIF > 5 will be eliminated from the model.
 												  	<br><br>
@@ -2129,7 +2129,7 @@
 										<article>
 											<a class="image"><img src="images/imba_head.png" alt="" /></a>
 											<h3>5. Performance Metric</h3>
-											<p>In-hospital mortality will be our target in this project - 1 being in-hospital death while 0 being survival. There are only 13.9% of in-hospital mortality (positives) in the dataset. In such cases, using accuracy as a metric will be misleading and unreliable.</p>
+											<p>In-hospital mortality will be our target in this project - 1 being in-hospital death while 0 being survival. There are only 15.0% of in-hospital mortality (positives) in the dataset. In such cases, using accuracy as a metric will be misleading and unreliable.</p>
 
 											<button id="imba_btn" class="button">More</button>
 
@@ -2144,7 +2144,7 @@
 												  <p> In-hospital mortality will be our target in this project - 1 being in-hospital death while 0 being survival. The graph below shows the distribution of the two classes. There are only 15.0% of in-hospital mortality (positives) in the dataset. In such cases, using accuracy as a metric will be misleading and unreliable. (Think about it. Even without any algorithm, we will achieve an accuracy of 85.0%!)
 												  <br><br>
 												  <img src="images/imba_1.png" alt="" />
-												  <br><br>Hence, instead of accuracy, precision and recall scores will be a more meaningful metric to evaluate our model performance. We will be using the same scoring as the PhysioNet 2012 challenge - the minimum of precision score and recall score. We define true positives (TP), false positives (FP), false negatives (FN), and true negatives (TN) as below:
+												  <br><br>Hence, instead of accuracy, precision and recall scores will be a more meaningful metric to evaluate our model performance. I will be using the same scoring as the PhysioNet 2012 challenge - the minimum of precision score and recall score. I define true positives (TP), false positives (FP), false negatives (FN), and true negatives (TN) as below:
 												  <br><br>
 												  <img src="images/imba_2.png" alt="" />
 													<br><br>
@@ -2185,7 +2185,7 @@
 												  	<br><br>
 												  	<img src="images/imba_1.png" alt="" />
 												  	<br><br>
-												  	If we were to build a classifier in this dataset, we will probably obtain a 85% accuracy. However, the ‘correctly classified data’ would all come from the majority class. This is because most algorithms do not perform well with imbalanced datasets. It will tend to be bias towards the majority class. 
+												  	If I were to build a classifier in this dataset, I will probably obtain a 85% accuracy. However, the ‘correctly classified data’ would all come from the majority class. This is because most algorithms do not perform well with imbalanced datasets. It will tend to be bias towards the majority class. 
 												  	<br><br>
 												  	To deal with this problem, there are two approaches that we have used in this dataset: Oversampling with Synthetic Minority Over-sampling Technique (SMOTE) and Edited Nearest Neighbours (ENN).
 												  	<br><br>
@@ -2193,7 +2193,7 @@
 												  	<br><br>
 												  	ENN removes datapoint if the datapoint’s class is different from the majority of it K nearest neighbours.
 												  	<br><br>
-												  	After resampling, we will increase the percentage of minority class from 15.0% to 38.8%. 
+												  	After resampling, we will increase the percentage of minority class from 15.0% to 38.8%.
 												  	<br><br>
 												  	<img src="images/resamp_pie.png" alt="" />
 												  	<br><br>
@@ -2218,24 +2218,24 @@
 												<li><strong>Decision Tree</strong></li>
 												<li><strong>Random Forest</strong></li>
 												<li><strong>SVM</strong></li>
-												<li><strong>Feedforward Neural Network</strong></li>
+												
 											</ul>
 											<br>
 											The goal of our model is not to achieve the highest accuracy, but having a right balance between our precision score and recall score. Taking things into context : <br><br>
 											<ul>
-												<li>‘False Positive’ means that patients who did not survive the hospital stay are not being identified. This may result in an erroneous focus on the patient’s treatment priority. (e.g. choice of sending patient to hospice)</li>
+												<li><strong>‘False Positive’</strong> means that patients who did not survive the hospital stay are not being identified. This may result in an erroneous focus on the patient’s treatment priority. (e.g. choice of sending patient to hospice)</li>
 												<br>
-												<li>’False Negative’ means that patients who survive the hospital stay are being flagged with a probability of mortality. This may result in unnecessary panic and less efficient allocation of resources. </li>
+												<li><strong>’False Negative’</strong> means that patients who survive the hospital stay are being flagged with a probability of mortality. This may result in unnecessary panic and less efficient allocation of resources. </li>
 											</ul>
 											<br>
-											We will be using the minimum of precision score and recall score as our metric for our models and  using the *SOFA score as a benchmark.
+											I will be using the minimum of precision score and recall score as our metric for our models and  using the *SOFA score as a benchmark.
 											<br><br>
 											Here are the results achieved for the different models:
 											<br><br>
 											<img src="images/results1.png" alt="" />
 											<br><br>We can observed that the models did not perform that well and there is definitely room for improvement. 
 											<br><br>
-											We tried using Linear Discriminant Analysis (LDA) to reduce feature dimension and to reduce complexity in our model. LDA finds a low-dimensional space such that when X is projected, the classes are well-separated at its best. However, it is essential to note that LDA assumes normality in the dataset. This assumption is violated in the case of our dataset.
+											I tried using Linear Discriminant Analysis (LDA) to reduce feature dimension and to reduce complexity in our model. LDA finds a low-dimensional space such that when the features are projected, the classes are well-separated at its best. However, it is essential to note that LDA assumes normality in the dataset. This assumption is violated in the case of our dataset.
 											<br><br>
 											After using LDA, we can see a significant improvement in our results:
 											<br><br>
@@ -2246,13 +2246,13 @@
 											<br><br>
 											<ul>
 												<li><strong>Increase the number of training data</strong> 
-													<br> Although we had 4000 rows of patients data initially, due to oversampling to handle the imbalance classes and train test split, we are left with only 1321 rows for our modelling. This led to the model not being able to train and generalise well.</li>
+													<br> Although I had 4000 rows of patients data initially, due to oversampling to handle the imbalance classes and train test split, I am left with only 1321 rows for our modelling. This led to the model not being able to train and generalise well.</li>
 												<br>
 												<li><strong>Bring in clinical knowledge </strong>
-													<br>By having domain knowledge of ICU medicine, we will be able to identify and rank key features based on their importance in prediction. With such information, we will be able assign weights to more important features.</li>
+													<br>By having domain knowledge of ICU medicine, I will be able to identify and rank key features based on their importance in prediction. With such information, I will be able assign weights to more important features.</li>
 												<br>
-												<li><strong>Explore more sophisticated models </strong>
-													<br>Such as Convolutional Neural Networks, LSTM (Long Short Term Memory), Ensemble methods which have been known to produce better accuracies. However, it is essential to note that more complex models would usually require higher computing power, more time thus leading to higher costs.</li>
+												<li><strong>Explore further imputation methods</strong>
+													<br>As each patient is admitted into the ICU with different conditions, it is not practical to obtain all variables from every patient, resulting in many NaN values. Imputation of the NaN values is hence a crucial step in the project. Other methods such as fuzzy kmeans and unsupervised methods such as KNN or SVD can be explored.</li>
 												</ul>
 
 												<br><br>
@@ -2260,7 +2260,7 @@
 
 											*Benchmarking based on SOFA (Sequential Organ Failure Assessment) scores 
 											<br><br>
-											The SOFA score is available under the outcome-related descriptors in our dataset. Do note that SOFA score is designed to evaluate organ dysfunction in critically ill patients and not directly to predict mortality. However, SOFA scores can be used as an estimation of mortality in the ICU based on two research papers:<br><br>
+											The SOFA score is available under the outcome-related descriptors in the dataset. Do note that SOFA score is designed to evaluate organ dysfunction in critically ill patients and not directly to predict mortality. However, SOFA scores can be used as an estimation of mortality in the ICU based on two research papers:<br><br>
 											<ul>
 												<li>Vincent JL, de Mendonça A, Cantraine F, et al. Use of the SOFA score to assess the incidence of organ dysfunction/failure in intensive care units: results of a multicenter, prospective study. Working group on "sepsis-related problems" of the European Society of Intensive Care Medicine. Crit Care Med. 1998;26(11):1793-800. PMID 9824069. </li>
 												<li>Ferreira FL, Bota DP, Bross A, et al. Serial evaluation of the SOFA score to predict outcome in critically ill patients. JAMA. 2001;286(14):1754-8. PMID 11594901. </li>
@@ -2299,7 +2299,7 @@
 									            </tr>
 									        </tbody></table>
 
-									        <br>We will be taking mortality >= 50% (SOFA Score >= 13) as 'death' (1 in binary terms)
+									        <br>I will be taking mortality >= 50% (SOFA Score >= 13) as 'death' (1 in binary terms)
 									        <br><br>
 									        <i>*Reference: Jul 1 2017 - ClinCalc LLC (http://clincalc.com/IcuMortality/SOFA.aspx) </i>
 											
